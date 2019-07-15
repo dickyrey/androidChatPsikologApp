@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Cari Klien"
+        android:id="@+id/main_cari_klien_options"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Buat Grup"
+        android:id="@+id/main_create_group_options"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Pengaturan"
+        android:id="@+id/main_settings_options"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Keluar"
+        android:id="@+id/main_logout_options"
+        app:showAsAction="never">
+    </item>
+</menu>

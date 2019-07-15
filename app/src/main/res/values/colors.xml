@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1F43D6</color>
+    <color name="colorPrimaryDark">#042E99</color>
+    <color name="colorAccent">#e6e6e6</color>
+
+
+    //Button Color
+    <color name="button_orange">#fe5824</color>
+    <color name="button_blue">#40579b</color>
+    <color name="button_green">#43bd42</color>
+
+    <color name="loginSignup1Background">#f1f5f8</color>
+    <color name="loginSignup1colorAccent">#fe5824</color>
+
+
+    <color name="loginSignup2InputBg">#f1f5f8</color>
+
+    <color name="loginSignup15text">#585858</color>
+</resources>

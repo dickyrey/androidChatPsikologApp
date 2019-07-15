@@ -1,0 +1,196 @@
+{
+  "project_info": {
+    "project_number": "293359317859",
+    "firebase_url": "https://psikologiku-f2d2b.firebaseio.com",
+    "project_id": "psikologiku-f2d2b",
+    "storage_bucket": "psikologiku-f2d2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293359317859:android:ca0eca6d700fc080",
+        "android_client_info": {
+          "package_name": "com.dickyrey.konsulyuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293359317859-eq428961sfk9v7nl7e96j7167alg2hv5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dickyrey.konsulyuk",
+            "certificate_hash": "3e7493acde47825236f9724cbe23b66d33610d78"
+          }
+        },
+        {
+          "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdyPx1zqa0YVlkmLk8oYAUw6Hx4CdK3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293359317859:android:4b6242a7c3f60a0d",
+        "android_client_info": {
+          "package_name": "com.dickyrey.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293359317859-gcqdval5dd8nppl71kqq6hsiivtuen1c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dickyrey.myapplication",
+            "certificate_hash": "3e7493acde47825236f9724cbe23b66d33610d78"
+          }
+        },
+        {
+          "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdyPx1zqa0YVlkmLk8oYAUw6Hx4CdK3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293359317859:android:13cc23449eb32b8f",
+        "android_client_info": {
+          "package_name": "com.dickyrey.psikologkonsulyuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293359317859-fit5266g87sfu4ddrgllklol6476fdhg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dickyrey.psikologkonsulyuk",
+            "certificate_hash": "3e7493acde47825236f9724cbe23b66d33610d78"
+          }
+        },
+        {
+          "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdyPx1zqa0YVlkmLk8oYAUw6Hx4CdK3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293359317859:android:785c075b1e613f9e",
+        "android_client_info": {
+          "package_name": "com.example.psikologi_ku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293359317859-87h0pno2tqrh5adn83sfboh8hvco9afp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psikologi_ku",
+            "certificate_hash": "3e7493acde47825236f9724cbe23b66d33610d78"
+          }
+        },
+        {
+          "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdyPx1zqa0YVlkmLk8oYAUw6Hx4CdK3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293359317859:android:3c21761ff2b8c33d",
+        "android_client_info": {
+          "package_name": "com.example.psikologiku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293359317859-gnjcsbgfsbpgoggmijjhjll1lpj88uva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psikologiku",
+            "certificate_hash": "3e7493acde47825236f9724cbe23b66d33610d78"
+          }
+        },
+        {
+          "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdyPx1zqa0YVlkmLk8oYAUw6Hx4CdK3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293359317859-21ntp2ookkpko2oc2b1on0cmt8tpi99s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
