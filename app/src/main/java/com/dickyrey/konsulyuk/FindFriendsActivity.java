@@ -6,27 +6,39 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.dickyrey.konsulyuk.Model.Contacts;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+
+import com.dickyrey.konsulyuk.Model.User;
+import com.dickyrey.konsulyuk.Adapter.UserAdapter;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FindFriendsActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private RecyclerView FindFriendsRecyclerList;
-    private DatabaseReference UsersRef;
+
+    private RecyclerView recyclerView;
+
+    private EditText search_users;
+    private UserAdapter userAdapter;
+    private List<User> mUsers;
+
+
+
 
 
     @Override
@@ -34,71 +46,105 @@ public class FindFriendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
-        FindFriendsRecyclerList = findViewById(R.id.find_friends_recycler_list);
-        FindFriendsRecyclerList.setLayoutManager(new LinearLayoutManager(this));
-
         mToolbar = findViewById(R.id.find_firends_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Cari Psikolog");
+        getSupportActionBar().setTitle("Cari Klien");
+
+        recyclerView = findViewById(R.id.recycler_view);
+        search_users = findViewById(R.id.search_users);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        mUsers = new ArrayList<>();
+
+        readUsers();
+
+        search_users.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchUsers(charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        FirebaseRecyclerOptions<Contacts> options = new FirebaseRecyclerOptions.Builder<Contacts>()
-                .setQuery(UsersRef, Contacts.class)
-                .build();
-        FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder> adapter = new FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder>(options) {
+    private void searchUsers(String s) {
+        final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
+                .startAt(s)
+                .endAt(s+"\uf88f");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull FindFriendViewHolder holder, final int position, @NonNull Contacts model) {
-                holder.userName.setText(model.getName());
-                holder.userStatus.setText(model.getStatus());
-                Picasso.get().load(model.getImage()).placeholder(R.drawable.icon_male).into(holder.profileImage);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String visit_user_id = getRef(position).getKey();
+                    assert user != null;
+                    assert fuser != null;
+                    if (!user.getUid().equals(fuser.getUid())){
+                        mUsers.add(user);
+                    }
+                }
+                userAdapter = new UserAdapter(FindFriendsActivity.this, mUsers);
+                recyclerView.setAdapter(userAdapter);
+            }
 
-                        Intent profileIntent = new Intent(FindFriendsActivity.this, ProfileActivity.class);
-                        profileIntent.putExtra("visit_user_id", visit_user_id);
-                        startActivity(profileIntent);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    private void readUsers() {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    mUsers.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        User user = snapshot.getValue(User.class);
+
+                        assert user != null;
+                        assert firebaseUser != null;
+
+                        if (!user.getUid().equals(firebaseUser.getUid())) {
+                            mUsers.add(user);
+                        }
 
                     }
-                });
+
+                    userAdapter = new UserAdapter(getApplicationContext(), mUsers);
+                    recyclerView.setAdapter(userAdapter);
+
             }
 
-            @NonNull
             @Override
-            public FindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_layout, viewGroup, false);
-                FindFriendViewHolder viewHolder = new FindFriendViewHolder(view);
-                return viewHolder;
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-        };
-
-        FindFriendsRecyclerList.setAdapter(adapter);
-        adapter.startListening();
+        });
     }
 
-    public static class FindFriendViewHolder extends RecyclerView.ViewHolder{
 
-        TextView userName, userStatus;
-        CircleImageView profileImage;
 
-        public FindFriendViewHolder(@NonNull View itemView) {
-            super(itemView);
-            userName = itemView.findViewById(R.id.user_profile_name);
-            userStatus = itemView.findViewById(R.id.user_status);
-            profileImage = itemView.findViewById(R.id.users_profile_image);
-
-        }
-    }
 }

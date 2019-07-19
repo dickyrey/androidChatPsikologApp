@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.main_logout_options){
 
-            updateUserStatus("offiline");
+            updateUserStatus("offline");
 
             mAuth.signOut();
             SendToLoginActivity();

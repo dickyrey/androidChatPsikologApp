@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
         NotificationRef = FirebaseDatabase.getInstance().getReference().child("Notifications");
 
-        receiverUserID = getIntent().getExtras().get("visit_user_id").toString();
+        receiverUserID = getIntent().getExtras().get("uid").toString();
 
         mAth = FirebaseAuth.getInstance();
         senderUserID = mAth.getCurrentUser().getUid();
@@ -116,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
                             if (request_type.equals("sent"))
                             {
                                 Current_State = "request_sent";
-                                SendMessageRequestButton.setText("Batalkan Konsultasi");
+                                SendMessageRequestButton.setText("Batalkan Permintaan");
                             }
                             else if (request_type.equals("received"))
                             {
@@ -345,7 +345,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                                 {
                                                                     SendMessageRequestButton.setEnabled(true);
                                                                     Current_State = "request_sent";
-                                                                    SendMessageRequestButton.setText("Cancel Chat Request");
+                                                                    SendMessageRequestButton.setText("Batalkan Permintaan");
                                                                 }
                                                             }
                                                         });

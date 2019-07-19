@@ -167,6 +167,7 @@ public class SettingsActivity extends AppCompatActivity {
             HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uid", currentUserID);
             profileMap.put("name", setUserName);
+            profileMap.put("search", setUserName.toLowerCase());
             profileMap.put("status", setStatus);
             RootRef.child("Psikolog").child(currentUserID).updateChildren(profileMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {

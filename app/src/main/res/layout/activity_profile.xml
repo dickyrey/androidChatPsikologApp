@@ -53,7 +53,7 @@
         android:layout_marginRight="65dp"
         android:textColor="@android:color/background_light"
         android:background="@drawable/buttons"
-        android:text="Konsultasi Sekarang"
+        android:text="Kirim Permintaan"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textAllCaps="false"

@@ -1,24 +1,15 @@
 package com.dickyrey.konsulyuk.Model;
 
-public class Contacts {
-    public String uid, name, status, image;
+public class Kliens {
+    public String name, status, image;
 
-    public Contacts() {
+    public Kliens() {
     }
 
-    public Contacts(String uid, String name, String status, String image) {
-        this.uid = uid;
+    public Kliens(String name, String status, String image) {
         this.name = name;
         this.status = status;
         this.image = image;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 
     public String getName() {

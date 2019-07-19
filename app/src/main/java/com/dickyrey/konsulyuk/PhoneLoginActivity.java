@@ -2,6 +2,7 @@ package com.dickyrey.konsulyuk;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -33,11 +34,18 @@ public class PhoneLoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private ProgressDialog loadingBar;
+    private Toolbar LoginPhoneToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_login);
+
+        LoginPhoneToolbar = findViewById(R.id.login_phone_toolbar);
+        setSupportActionBar(LoginPhoneToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setTitle("Profil Psikolog");
 
         mAuth = FirebaseAuth.getInstance();
 

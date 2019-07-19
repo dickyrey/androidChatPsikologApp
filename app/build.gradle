@@ -38,6 +38,9 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:glide:4.0.0'
+
     //Firebase
 //    implementation 'com.google.firebase:firebase-auth:18.0.0'
 //    implementation 'com.google.firebase:firebase-database:18.0.0'
@@ -50,5 +53,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
     implementation 'com.google.firebase:firebase-storage:11.8.0'
     implementation 'com.firebaseui:firebase-ui-database:3.2.2'
+//    implementation 'com.firebaseui:firebase-ui-database:2.3.0'
 
 }
