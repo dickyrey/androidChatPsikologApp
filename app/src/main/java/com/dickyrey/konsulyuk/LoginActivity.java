@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dickyrey.konsulyuk.Utils.Tools;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +24,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button LoginButton, PhoneLoginButton;
+    private Button LoginButton;
     private EditText UserEmail, UserPassword;
     private TextView NeedAccountLink, ForgetPasswordLink;
     private ProgressDialog loadingBar;
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Tools.setSystemBarColor(this, android.R.color.darker_gray);
+        Tools.setSystemBarLight(this);
         mAuth = FirebaseAuth.getInstance();
         RootRef = FirebaseDatabase.getInstance().getReference().child("Psikolog");
 
@@ -58,13 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        PhoneLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent phoneLoginIntent = new Intent(LoginActivity.this, PhoneLoginActivity.class);
-                startActivity(phoneLoginIntent);
-            }
-        });
 
         ForgetPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void InitializeFields() {
         LoginButton = findViewById(R.id.login_button);
-        PhoneLoginButton = findViewById(R.id.phone_login_button);
         UserEmail = findViewById(R.id.login_email);
         UserPassword = findViewById(R.id.login_password);
         NeedAccountLink = findViewById(R.id.need_new_account_link);

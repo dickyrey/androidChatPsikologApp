@@ -4,28 +4,37 @@ package com.dickyrey.konsulyuk;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dickyrey.konsulyuk.Adapter.MessageAdapter;
+import com.dickyrey.konsulyuk.Fragment.RequestsFragment;
+import com.dickyrey.konsulyuk.Model.Contacts;
 import com.dickyrey.konsulyuk.Model.Messages;
+import com.firebase.ui.database.FirebaseListOptions;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,6 +45,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -77,8 +87,6 @@ public class ChatActivity extends AppCompatActivity {
     private StorageTask uploadTask;
     private Uri fileUri;
     private ProgressDialog loadingBar;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +168,6 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-
     private void InitializeControllers() {
         ChatToolbar = findViewById(R.id.chat_toolbar);
         setSupportActionBar(ChatToolbar);
@@ -195,6 +202,7 @@ public class ChatActivity extends AppCompatActivity {
 
         SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
         saveCurrentTime = currentTime.format(calendar.getTime());
+
 
     }
 

@@ -53,7 +53,9 @@ public class GroupMessageAdapter extends RecyclerView.Adapter<GroupMessageAdapte
         else{
             //getimagelater
             holder.tvTitle.setText(groupMessage.getName() + " \n" +groupMessage.getMessage());
+            holder.tvTitle.setBackgroundColor(Color.parseColor("#43bd42"));
             holder.ibDelete.setVisibility(View.GONE);
+
         }
     }
 
@@ -79,7 +81,6 @@ public class GroupMessageAdapter extends RecyclerView.Adapter<GroupMessageAdapte
                 @Override
                 public void onClick(View view) {
                     messageDB.child(groupMessages.get(getAdapterPosition()).getKey()).removeValue();
-
                 }
             });
         }

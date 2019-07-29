@@ -37,8 +37,11 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'com.balysv:material-ripple:1.0.2'                  // ripple effect
 
-    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'             // image loader
+
     annotationProcessor 'com.github.bumptech.glide:glide:4.0.0'
 
     //Firebase

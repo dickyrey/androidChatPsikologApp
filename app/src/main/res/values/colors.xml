@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1F43D6</color>
-    <color name="colorPrimaryDark">#042E99</color>
-    <color name="colorAccent">#e6e6e6</color>
+
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorPrimaryLight">#1E88E5</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccentDark">#F50057</color>
+    <color name="colorAccentLight">#FF80AB</color>
+
 
 
     //Button Color
@@ -17,4 +22,25 @@
     <color name="loginSignup2InputBg">#f1f5f8</color>
 
     <color name="loginSignup15text">#585858</color>
+
+    //color
+
+    <color name="grey_5">#f2f2f2</color>
+    <color name="grey_20">#cccccc</color>
+    <color name="grey_40">#999999</color>
+    <color name="grey_60">#666666</color>
+    <color name="grey_400">#BDBDBD</color>
+
+    <color name="green_300">#81C784</color>
+    <color name="green_400">#66BB6A</color>
+    <color name="green_500">#4CAF50</color>
+
+    <color name="blue_600">#1E88E5</color>
+
+    <color name="blue_grey_200">#B0BEC5</color>
+    <color name="blue_grey_300">#90A4AE</color>
+    <color name="blue_grey_400">#78909C</color>
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_800">#37474F</color>
+
 </resources>

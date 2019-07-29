@@ -50,7 +50,7 @@ public class KlienActivity extends AppCompatActivity {
         setSupportActionBar(CariPsikolog);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Cari Klien");
+        getSupportActionBar().setTitle("Daftar Klien");
 
         chatList = findViewById(R.id.chats_list);
         chatList.setLayoutManager(new LinearLayoutManager(this));

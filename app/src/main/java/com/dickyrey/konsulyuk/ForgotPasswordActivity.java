@@ -31,11 +31,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        ForgotPasswordToolbar = findViewById(R.id.settings_toolbar);
+        ForgotPasswordToolbar = findViewById(R.id.forgot_password_toolbar);
         setSupportActionBar(ForgotPasswordToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Reset Password");
+        getSupportActionBar().setTitle("");
 
         send_email = findViewById(R.id.send_email);
         btn_reset = findViewById(R.id.btn_reset);

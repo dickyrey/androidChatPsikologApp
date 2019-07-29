@@ -149,11 +149,11 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             loadingBar.dismiss();
-                            Toast.makeText(PhoneLoginActivity.this, "Berhasil login!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PhoneLoginActivity.this, "Berhasil login!", Toast.LENGTH_SHORT).show();
                             SendUserToMainActivity();
                         }else{
                             String message = task.getException().toString();
-                            Toast.makeText(PhoneLoginActivity.this, "Error: " +message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PhoneLoginActivity.this, "Kode Verifikasi Salah, Coba Lagi!" , Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

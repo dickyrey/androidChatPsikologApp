@@ -250,7 +250,6 @@ public class RequestsFragment extends Fragment {
                                                 holder.userName.setText(requestUserName);
                                                 holder.userStatus.setText("Kamu mengirim permintaan ke " + requestUserName);
 
-
                                                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view)
