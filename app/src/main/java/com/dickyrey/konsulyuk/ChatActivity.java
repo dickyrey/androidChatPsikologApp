@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,8 +31,10 @@ import android.widget.Toast;
 
 import com.dickyrey.konsulyuk.Adapter.MessageAdapter;
 import com.dickyrey.konsulyuk.Fragment.RequestsFragment;
+import com.dickyrey.konsulyuk.Model.Artikel;
 import com.dickyrey.konsulyuk.Model.Contacts;
 import com.dickyrey.konsulyuk.Model.Messages;
+import com.dickyrey.konsulyuk.ViewHolder.ArtikelList;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -102,8 +105,10 @@ public class ChatActivity extends AppCompatActivity {
         messageReceiverImage = getIntent().getExtras().get("visit_image").toString();
 
 
+
         InitializeControllers();
 
+        loadMessage();
 
         userName.setText(messageReceiverName);
         Picasso.get().load(messageReceiverImage).placeholder(R.drawable.icon_male).into(userImage);
@@ -168,6 +173,40 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    private void loadMessage() {
+        RootRef.child("Messages").child(messageSenderID).child(messageReceiverID)
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                        Messages messages = dataSnapshot.getValue(Messages.class);
+                        messagesList.add(messages);
+                        messageAdapter.notifyDataSetChanged();
+                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
     private void InitializeControllers() {
         ChatToolbar = findViewById(R.id.chat_toolbar);
         setSupportActionBar(ChatToolbar);
@@ -205,6 +244,47 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
+
+//    private void load(){
+//        RootRef.child("Messages").child(messageSenderID).child(messageReceiverID
+//        ).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    Messages messages = snapshot.getValue(Messages.class);
+//                    Messages data = new Messages();
+//                    assert messages != null;
+//                    String pesan = messages.getMessage();
+//                    String time = messages.getTime();
+//                    String from = messages.getFrom();
+//                    String type = messages.getType();
+//                    String to = messages.getTo();
+//                    String id = messages.getMessageID();
+//
+//                    data.setMessage(pesan);
+//                    data.setTime(time);
+//                    data.setFrom(from);
+//                    data.setType(type);
+//                    data.setTo(to);
+//                    data.setMessageID(id);
+//                    messagesList.add(data);
+//                }
+//                MessageAdapter recycler = new MessageAdapter(messagesList);
+//                RecyclerView.LayoutManager layoutmanager = new LinearLayoutManager(ChatActivity.this);
+//                userMessagesList.setLayoutManager(layoutmanager);
+//                userMessagesList.setItemAnimator( new DefaultItemAnimator());
+//                userMessagesList.setAdapter(recycler);
+//                recycler.notifyDataSetChanged();
+//
+//                userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -347,7 +427,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private void DisplayLastSeen(){
-        RootRef.child("Users").child(messageSenderID)
+        RootRef.child("Psikolog").child(messageSenderID)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -375,50 +455,16 @@ public class ChatActivity extends AppCompatActivity {
                 });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        messageAdapter.notifyDataSetChanged();
-
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        RootRef.child("Messages").child(messageSenderID).child(messageReceiverID)
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        messageAdapter.notifyDataSetChanged();
 
-                        Messages messages = dataSnapshot.getValue(Messages.class);
-                        messagesList.add(messages);
-                        messageAdapter.notifyDataSetChanged();
-
-                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
     }
+
+//
     private void SendMessage(){
         String messageText = MessageInputText.getText().toString();
         if (TextUtils.isEmpty(messageText)){
@@ -442,7 +488,6 @@ public class ChatActivity extends AppCompatActivity {
             messageTextBody.put("messageID", messagePushID);
             messageTextBody.put("time", saveCurrentTime);
             messageTextBody.put("date", saveCurrentDate);
-
 
 
             Map messageBodyDetails = new HashMap();

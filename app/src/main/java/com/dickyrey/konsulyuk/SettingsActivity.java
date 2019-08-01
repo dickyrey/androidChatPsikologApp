@@ -4,19 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,22 +44,31 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button UpdateAccountSettings;
-    private EditText userName, userStatus;
-    private CircleImageView userProfileImage;
+    private FloatingActionButton button_change_foto, button_save;
+    private EditText setting_name, setting_tempat_praktek, setting_pendidikan, setting_email, setting_web;
+    private Spinner setting_genre;
+    private ImageView setting_image;
     private String currentUserID;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
+    private Uri mainImageUri = null;
 
     private static final int GalleryPick = 1;
     private StorageReference UserProfileImageRef;
     private ProgressDialog loadingBar;
     private Toolbar SettingsToolbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        SettingsToolbar = findViewById(R.id.setting_toolbar);
+        setSupportActionBar(SettingsToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Daftar Klien");
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -59,123 +76,144 @@ public class SettingsActivity extends AppCompatActivity {
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
         initializeFields();
 
-        userName.setVisibility(View.VISIBLE);
+        setting_name.setVisibility(View.VISIBLE);
 
-        UpdateAccountSettings.setOnClickListener(new View.OnClickListener() {
+        button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UpdateSettings();
             }
         });
+
         RetrieveUserInfo();
 
-        userProfileImage.setOnClickListener(new View.OnClickListener() {
+        button_change_foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, GalleryPick);
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setAspectRatio(1, 1)
+                        .start(SettingsActivity.this);
+
+
             }
         });
     }
 
     private void initializeFields() {
-        UpdateAccountSettings = findViewById(R.id.update_settings_button);
-        userName = findViewById(R.id.set_user_name);
-        userStatus = findViewById(R.id.set_profile_status);
-        userProfileImage = findViewById(R.id.set_profile_image);
+        button_save = findViewById(R.id.button_save);
+        button_change_foto = findViewById(R.id.button_change_photo);
+        setting_name = findViewById(R.id.setting_name);
+        setting_pendidikan = findViewById(R.id.setting_pendidikan);
+        setting_email = findViewById(R.id.setting_email);
+        setting_tempat_praktek = findViewById(R.id.setting_tempat_praktek);
+        setting_image = findViewById(R.id.setting_image);
+        setting_web = findViewById(R.id.setting_web);
         loadingBar = new ProgressDialog(this);
 
-        SettingsToolbar = findViewById(R.id.settings_toolbar);
-        setSupportActionBar(SettingsToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Pengaturan Akun");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GalleryPick && resultCode == RESULT_OK && data!=null){
-            Uri ImageUri = data.getData();
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
             if (resultCode == RESULT_OK) {
-                loadingBar.setTitle("Memasang Foto Profil");
-                loadingBar.setMessage("Mohon Tunggu..");
-                loadingBar.setCanceledOnTouchOutside(false);
-                loadingBar.show();
+                mainImageUri = result.getUri();
+                setting_image.setImageURI(mainImageUri);
+                if (resultCode == RESULT_OK) {
+                    loadingBar.setTitle("Memasang Foto Profil");
+                    loadingBar.setMessage("Mohon Tunggu..");
+                    loadingBar.setCanceledOnTouchOutside(false);
+                    loadingBar.show();
 
-                Uri resultUri = result.getUri();
-                StorageReference filePath = UserProfileImageRef.child(currentUserID + ".jpg");
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(SettingsActivity.this, "Foto Profil sukses diperbarui", Toast.LENGTH_SHORT).show();
+                    Uri resultUri = result.getUri();
+                    StorageReference filePath = UserProfileImageRef.child(currentUserID + ".jpg");
+                    filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SettingsActivity.this, "Foto Profil sukses diperbarui", Toast.LENGTH_SHORT).show();
 
-                            final String downloadUrl = task.getResult().getDownloadUrl().toString();
+                                final String downloadUrl = task.getResult().getDownloadUrl().toString();
 
-                            RootRef.child("Psikolog").child(currentUserID).child("image")
-                                    .setValue(downloadUrl)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Toast.makeText(SettingsActivity.this, "Gambar berhasil disimpan!", Toast.LENGTH_SHORT).show();
-                                                loadingBar.dismiss();
-                                            }else{
-                                                String message = task.getException().toString();
-                                                Toast.makeText(SettingsActivity.this, "Error: "+message, Toast.LENGTH_SHORT).show();
-                                                loadingBar.dismiss();
+                                RootRef.child("Psikolog").child(currentUserID).child("image")
+                                        .setValue(downloadUrl)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(SettingsActivity.this, "Gambar berhasil disimpan!", Toast.LENGTH_SHORT).show();
+                                                    loadingBar.dismiss();
+                                                } else {
+                                                    String message = task.getException().toString();
+                                                    Toast.makeText(SettingsActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                                                    loadingBar.dismiss();
+                                                }
                                             }
-                                        }
-                                    });
-                        }else{
-                            String message = task.getException().toString();
-                            Toast.makeText(SettingsActivity.this, "Error: "+message, Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
+                                        });
+                            } else {
+                                String message = task.getException().toString();
+                                Toast.makeText(SettingsActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            }
                         }
-                    }
-                });
-            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Exception error = result.getError();
-            }
+                    });
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    Exception error = result.getError();
+                }
 
+            }
         }
 
     }
 
     private void UpdateSettings() {
-        String setUserName = userName.getText().toString();
-        String setStatus = userStatus.getText().toString();
+        String setName= setting_name.getText().toString();
+        String setPendidikan = setting_pendidikan.getText().toString();
+        String setEmail = setting_email.getText().toString();
+        String setTempatPraktek = setting_tempat_praktek.getText().toString();
+        String setWeb = setting_web.getText().toString();
 
-        if (TextUtils.isEmpty(setUserName)){
-            Toast.makeText(this, "Tulis username dengan benar!", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(setName) && mainImageUri != null){
+            Toast.makeText(this, "Tulis Nama Kamu dengan benar!", Toast.LENGTH_SHORT).show();
         }
-        if (TextUtils.isEmpty(setStatus)){
-            Toast.makeText(this, "Tulis Bio dengan benar!", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(setPendidikan)){
+            Toast.makeText(this, "Tulis Pendidikan Terakhir Kamu!", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(setEmail)){
+            Toast.makeText(this, "Tulis e-Mail Kamu!", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(setTempatPraktek)){
+            Toast.makeText(this, "Tulis Tempat Praktek Kamu!", Toast.LENGTH_SHORT).show();
         }else{
             HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uid", currentUserID);
-            profileMap.put("name", setUserName);
-            profileMap.put("search", setUserName.toLowerCase());
-            profileMap.put("status", setStatus);
+            profileMap.put("name", setName);
+            profileMap.put("search", setName.toLowerCase());
+            profileMap.put("pendidikan", setPendidikan);
+            profileMap.put("email", setEmail);
+            profileMap.put("tempatpraktek", setTempatPraktek);
+            profileMap.put("web", setWeb);
+
+            StorageReference filePath = UserProfileImageRef.child(currentUserID + ".jpg");
+            filePath.putFile(mainImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()){
+                        Uri download_uri = task.getResult().getDownloadUrl();
+//                        Toast.makeText(SettingsActivity.this, "", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
             RootRef.child("Psikolog").child(currentUserID).updateChildren(profileMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
                                 SendUserToMainActivity();
-                                Toast.makeText(SettingsActivity.this, "Profile berhasil diupdate!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SettingsActivity.this, "Data Berhasil disimpan!", Toast.LENGTH_SHORT).show();
                             }else{
                                 String message = task.getException().toString();
                                 Toast.makeText(SettingsActivity.this, "Error: "+message, Toast.LENGTH_SHORT).show();
@@ -191,24 +229,36 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name") && (dataSnapshot.hasChild("image")))){
-                            String retrieveUserName = dataSnapshot.child("name").getValue().toString();
-                            String retrieveStatus = dataSnapshot.child("status").getValue().toString();
-                            String retrieveProfileImage = dataSnapshot.child("image").getValue().toString();
+                            String retrieveName = dataSnapshot.child("name").getValue().toString();
+                            String retrievePendidikan = dataSnapshot.child("pendidikan").getValue().toString();
+                            String retrieveEmail = dataSnapshot.child("email").getValue().toString();
+                            String retrieveTempatPraktek = dataSnapshot.child("tempatpraktek").getValue().toString();
+                            String retrieveWeb = dataSnapshot.child("web").getValue().toString();
+                            String retrieveImage = dataSnapshot.child("image").getValue().toString();
 
-                            userName.setText(retrieveUserName);
-                            userStatus.setText(retrieveStatus);
-                            Picasso.get().load(retrieveProfileImage).into(userProfileImage);
+                            setting_name.setText(retrieveName);
+                            setting_pendidikan.setText(retrievePendidikan);
+                            setting_email.setText(retrieveEmail);
+                            setting_tempat_praktek.setText(retrieveTempatPraktek);
+                            setting_web.setText(retrieveWeb);
+                            Picasso.get().load(retrieveImage).into(setting_image);
 
                         }else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))){
-                            String retrieveUserName = dataSnapshot.child("name").getValue().toString();
-                            String retrieveStatus = dataSnapshot.child("status").getValue().toString();
+                            String retrieveName = dataSnapshot.child("name").getValue().toString();
+                            String retrievePendidikan = dataSnapshot.child("pendidikan").getValue().toString();
+                            String retrieveEmail = dataSnapshot.child("email").getValue().toString();
+                            String retrieveTempatPraktek = dataSnapshot.child("tempatpraktek").getValue().toString();
+                            String retrieveWeb = dataSnapshot.child("web").getValue().toString();
 
-                            userName.setText(retrieveUserName);
-                            userStatus.setText(retrieveStatus);
+                            setting_name.setText(retrieveName);
+                            setting_pendidikan.setText(retrievePendidikan);
+                            setting_email.setText(retrieveEmail);
+                            setting_tempat_praktek.setText(retrieveTempatPraktek);
+                            setting_web.setText(retrieveWeb);
 
                         }else {
-                            userName.setVisibility(View.VISIBLE);
-                            Toast.makeText(SettingsActivity.this, "Perbarui profile dengan benar", Toast.LENGTH_SHORT).show();
+                            setting_name.setVisibility(View.VISIBLE);
+//                            Toast.makeText(SettingsActivity.this, "Perbarui profile dengan benar", Toast.LENGTH_SHORT).show();
                         }
                     }
 

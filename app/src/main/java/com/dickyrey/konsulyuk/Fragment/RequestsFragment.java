@@ -60,7 +60,7 @@ public class RequestsFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Psikolog");
         ChatRequestsRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
         ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
 
@@ -117,7 +117,7 @@ public class RequestsFragment extends Fragment {
                                                 }
 
                                                 final String requestUserName = dataSnapshot.child("name").getValue().toString();
-                                                final String requestUserStatus = dataSnapshot.child("status").getValue().toString();
+                                                final String requestUserStatus = dataSnapshot.child("pendidikan").getValue().toString();
 
                                                 holder.userName.setText(requestUserName);
                                                 holder.userStatus.setText("ingin mengobrol denganmu..");
@@ -245,7 +245,7 @@ public class RequestsFragment extends Fragment {
                                                 }
 
                                                 final String requestUserName = dataSnapshot.child("name").getValue().toString();
-                                                final String requestUserStatus = dataSnapshot.child("status").getValue().toString();
+                                                final String requestUserStatus = dataSnapshot.child("pendidikan").getValue().toString();
 
                                                 holder.userName.setText(requestUserName);
                                                 holder.userStatus.setText("Kamu mengirim permintaan ke " + requestUserName);

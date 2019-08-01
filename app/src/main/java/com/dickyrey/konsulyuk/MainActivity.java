@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,10 +17,14 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dickyrey.konsulyuk.Adapter.TabAccessorAdapter;
+import com.dickyrey.konsulyuk.Fragment.AccountFragment;
+import com.dickyrey.konsulyuk.Fragment.ChatsFragment;
+import com.dickyrey.konsulyuk.Fragment.ArtikelFragment;
+import com.dickyrey.konsulyuk.Fragment.MenuFragment;
+import com.dickyrey.konsulyuk.Fragment.RequestsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,14 +40,14 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private ViewPager myViewPager;
-    private TabLayout myTabLayout;
-    private TabAccessorAdapter myTabAccessorAdapter;
+
+    private BottomNavigationView navigation;
 
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
 
     private String currentUserID;
+
 
 
     @Override
@@ -53,17 +59,88 @@ public class MainActivity extends AppCompatActivity {
 
         RootRef = FirebaseDatabase.getInstance().getReference();
 
+        navigation = findViewById(R.id.navigation);
         mToolbar = findViewById(R.id.main_page_bar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("PSIKOLOGIKU");
 
-        myViewPager = findViewById(R.id.main_tabs_pager);
-        myTabAccessorAdapter = new TabAccessorAdapter(getSupportFragmentManager());
-        myViewPager.setAdapter(myTabAccessorAdapter);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        myTabLayout = findViewById(R.id.main_tabs);
-        myTabLayout.setupWithViewPager(myViewPager);
+        loadFragment(new MenuFragment());
+
+        NestedScrollView nested_content = findViewById(R.id.nested_scroll_view);
+        nested_content.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY < oldScrollY) { // up
+                    animateNavigation(false);
+                    animateSearchBar(false);
+                }
+                if (scrollY > oldScrollY) { // down
+                    animateNavigation(true);
+                    animateSearchBar(false);
+                }
+            }
+        });
+
     }
+    boolean isNavigationHide = false;
+
+    private void animateNavigation(final boolean hide) {
+        if (isNavigationHide && hide || !isNavigationHide && !hide) return;
+        isNavigationHide = hide;
+        int moveY = hide ? (2 * navigation.getHeight()) : 0;
+        navigation.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+    }
+
+    boolean isSearchBarHide = false;
+
+    private void animateSearchBar(final boolean hide) {
+        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
+        isSearchBarHide = hide;
+        int moveY = hide ? -(2 * mToolbar.getHeight()) : 0;
+        mToolbar.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    fragment = new MenuFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_chat:
+                    fragment = new ChatsFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_grup:
+                    fragment = new ArtikelFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_request:
+                    fragment = new RequestsFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_profile:
+                    fragment = new AccountFragment();
+                    loadFragment(fragment);
+
+            }
+            return false;
+        }
+    };
+
 
     @Override
     protected void onStart() {

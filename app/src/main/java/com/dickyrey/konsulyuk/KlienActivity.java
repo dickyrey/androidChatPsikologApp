@@ -58,7 +58,7 @@ public class KlienActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         ChatsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Psikolog");
 
 
     }
@@ -87,7 +87,7 @@ public class KlienActivity extends AppCompatActivity {
                             }
 
                             final String retName = dataSnapshot.child("name").getValue().toString();
-                            final String retStatus = dataSnapshot.child("status").getValue().toString();
+                            final String retStatus = dataSnapshot.child("pendidikan").getValue().toString();
 
                             holder.userName.setText(retName);
                             holder.userStatus.setText(retStatus);
@@ -134,7 +134,7 @@ public class KlienActivity extends AppCompatActivity {
             @NonNull
             @Override
             public KlienActivity.ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_layout, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_klien, viewGroup, false);
                 return new KlienActivity.ChatsViewHolder(view);
             }
         };

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewPostActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/newPostToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <ImageView
+        android:id="@+id/newPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:scaleType="fitXY"
+        android:layout_below="@+id/newPostToolbar"
+        android:layout_marginTop="2dp"
+        app:srcCompat="@drawable/bg_polygon" />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/newPostDescription"
+        android:hint="Tulis Judul Artikel"
+        android:layout_marginTop="10dp"
+        android:layout_margin="14dp"
+        android:layout_below="@id/newPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/newPostJudul"
+        android:hint="Tulis Deskripsi Artikel"
+        android:layout_marginTop="10dp"
+        android:layout_margin="14dp"
+        android:layout_below="@id/newPostDescription"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <Button
+        android:id="@+id/newPostButton"
+        android:layout_below="@id/newPostJudul"
+        android:text="Upload Artikel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

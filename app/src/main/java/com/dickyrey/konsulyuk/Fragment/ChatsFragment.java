@@ -61,7 +61,7 @@ public class ChatsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         ChatsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Psikolog");
 
         return PrivateChatsView;
     }
@@ -91,7 +91,7 @@ public class ChatsFragment extends Fragment {
                             }
 
                             final String retName = dataSnapshot.child("name").getValue().toString();
-                            final String retStatus = dataSnapshot.child("status").getValue().toString();
+                            final String retStatus = dataSnapshot.child("pendidikan").getValue().toString();
 
                             holder.userName.setText(retName);
                             holder.userStatus.setText("Dilihat: " + "\n" + " Time");
@@ -138,7 +138,7 @@ public class ChatsFragment extends Fragment {
             @NonNull
             @Override
             public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_layout, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_fragment, viewGroup, false);
                 return new ChatsViewHolder(view);
             }
         };

@@ -4,18 +4,21 @@ public class User {
     private String uid;
     private String name;
     private String image;
-    private String status;
+    private String email;
+    private String pendidikan;
+    private String tempatpraktek;
     private String search;
 
     public User() {
     }
 
-
-    public User(String uid, String name, String image, String status, String search) {
+    public User(String uid, String name, String image, String email, String pendidikan, String tempatpraktek, String search) {
         this.uid = uid;
         this.name = name;
         this.image = image;
-        this.status = status;
+        this.email = email;
+        this.pendidikan = pendidikan;
+        this.tempatpraktek = tempatpraktek;
         this.search = search;
     }
 
@@ -43,12 +46,28 @@ public class User {
         this.image = image;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPendidikan() {
+        return pendidikan;
+    }
+
+    public void setPendidikan(String pendidikan) {
+        this.pendidikan = pendidikan;
+    }
+
+    public String getTempatpraktek() {
+        return tempatpraktek;
+    }
+
+    public void setTempatpraktek(String tempatpraktek) {
+        this.tempatpraktek = tempatpraktek;
     }
 
     public String getSearch() {

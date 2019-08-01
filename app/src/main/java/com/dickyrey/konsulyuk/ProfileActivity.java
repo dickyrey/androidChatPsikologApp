@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,8 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private String receiverUserID, Current_State, senderUserID;
-    private CircleImageView userProfileImage;
-    private TextView userProfileName, userProfileStatus;
+    private ImageView profile_image;
+    private TextView profile_name, profile_pendidikan, profil_email, profil_web, profil_tempat_praktek;
     private Button SendMessageRequestButton, DeclineMessageRequestButton;
     private FirebaseAuth mAth;
 
@@ -47,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Cari Psikolog");
 
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Psikolog");
         ChatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
         ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
         NotificationRef = FirebaseDatabase.getInstance().getReference().child("Notifications");
@@ -57,9 +58,16 @@ public class ProfileActivity extends AppCompatActivity {
         mAth = FirebaseAuth.getInstance();
         senderUserID = mAth.getCurrentUser().getUid();
 
-        userProfileImage = findViewById(R.id.visit_profile_image);
-        userProfileName = findViewById(R.id.visit_user_name);
-        userProfileStatus = findViewById(R.id.visit_user_status);
+        profile_image = findViewById(R.id.profile_image);
+        profile_name= findViewById(R.id.profile_name);
+        profile_pendidikan= findViewById(R.id.profile_pendidikan);
+        profil_tempat_praktek= findViewById(R.id.profile_tempat_praktek);
+        profil_email= findViewById(R.id.profile_email);
+        profil_web= findViewById(R.id.profile_web);
+
+
+
+
         SendMessageRequestButton = findViewById(R.id.send_message_request_button);
         DeclineMessageRequestButton = findViewById(R.id.decline_message_request_button);
 
@@ -75,20 +83,36 @@ public class ProfileActivity extends AppCompatActivity {
                 if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("image"))){
                     String userImage = dataSnapshot.child("image").getValue().toString();
                     String userName = dataSnapshot.child("name").getValue().toString();
-                    String userStatus = dataSnapshot.child("status").getValue().toString();
+                    String userPendidikan = dataSnapshot.child("pendidikan").getValue().toString();
+                    String userTempatPraktek= dataSnapshot.child("tempatpraktek").getValue().toString();
+                    String userEmail = dataSnapshot.child("email").getValue().toString();
+                    String userWeb = dataSnapshot.child("web").getValue().toString();
 
-                    Picasso.get().load(userImage).placeholder(R.drawable.icon_male).into(userProfileImage);
-                    userProfileName.setText(userName);
-                    userProfileStatus.setText(userStatus);
+                    profile_name.setText(userName);
+                    profile_pendidikan.setText(userPendidikan);
+                    profil_tempat_praktek.setText(userTempatPraktek);
+                    profil_email.setText(userEmail);
+                    profil_web.setText(userWeb);
+
+
+                    Picasso.get().load(userImage).placeholder(R.drawable.icon_male).into(profile_image);
 
                     ManageChatRequests();
 
+
                 }else{
                     String userName = dataSnapshot.child("name").getValue().toString();
-                    String userStatus = dataSnapshot.child("status").getValue().toString();
+                    String userPendidikan = dataSnapshot.child("status").getValue().toString();
+                    String userTempatPraktek = dataSnapshot.child("tempatpraktek").getValue().toString();
+                    String userEmail = dataSnapshot.child("email").getValue().toString();
+                    String userWeb = dataSnapshot.child("web").getValue().toString();
 
-                    userProfileName.setText(userName);
-                    userProfileStatus.setText(userStatus);
+                    profile_name.setText(userName);
+                    profile_pendidikan.setText(userPendidikan);
+                    profil_tempat_praktek.setText(userTempatPraktek);
+                    profil_email.setText(userEmail);
+                    profil_web.setText(userWeb);
+
 
                     ManageChatRequests();
 

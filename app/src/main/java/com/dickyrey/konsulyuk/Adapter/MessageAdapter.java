@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dickyrey.konsulyuk.ChatActivity;
@@ -25,6 +27,7 @@ import com.dickyrey.konsulyuk.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -86,7 +89,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String fromUserID = messages.getFrom();
         String fromMessageType = messages.getType();
 
-        usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(fromUserID);
+
+        usersRef = FirebaseDatabase.getInstance().getReference("Psikolog")
+                .child(fromUserID);
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -199,8 +204,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                 }else if (i == 3){
                                     deleteMessageForEveryone(position, messageViewHolder);
 
-                                    Intent intent = new Intent(messageViewHolder.itemView.getContext(), MainActivity.class);
-                                    messageViewHolder.itemView.getContext().startActivity(intent);
+//                                    Intent intent = new Intent(messageViewHolder.itemView.getContext(), MainActivity.class);
+//                                    messageViewHolder.itemView.getContext().startActivity(intent);
                                 }
                             }
                         });
@@ -230,8 +235,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
                                     deleteMessageForEveryone(position, messageViewHolder);
 
-                                    Intent intent = new Intent(messageViewHolder.itemView.getContext(), MainActivity.class);
-                                    messageViewHolder.itemView.getContext().startActivity(intent);
+//                                    Intent intent = new Intent(messageViewHolder.itemView.getContext(), MainActivity.class);
+//                                    messageViewHolder.itemView.getContext().startActivity(intent);
                                 }
                             }
                         });
@@ -269,9 +274,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                 }else if (i == 3){
 
                                     deleteMessageForEveryone(position, messageViewHolder);
-
-                                    Intent intent = new Intent(messageViewHolder.itemView.getContext(), MainActivity.class);
-                                    messageViewHolder.itemView.getContext().startActivity(intent);
+//                                    Intent intent = new Intent(messageViewHolder.itemView.getContext(), MainActivity.class);
+//                                    messageViewHolder.itemView.getContext().startActivity(intent);
 
                                 }
                             }
@@ -379,10 +383,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
     }
 
+
     @Override
     public int getItemCount() {
         return userMessagesList.size();
     }
+
 
     private void deleteSentMessage(final int position, final MessageViewHolder holder){
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -397,6 +403,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                         if (task.isSuccessful()){
                             Toast.makeText(holder.itemView.getContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
 
+                            holder.senderMessageText.setVisibility(View.GONE);
                         }else{
                             Toast.makeText(holder.itemView.getContext(), "Error ! ", Toast.LENGTH_SHORT).show();
                         }
@@ -418,6 +425,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+
+                            holder.senderMessageText.setVisibility(View.GONE);
                             Toast.makeText(holder.itemView.getContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
 
                         }else{
@@ -448,7 +457,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
-
+                                                ;
+                                                holder.senderMessageText.setVisibility(View.GONE);
                                                 Toast.makeText(holder.itemView.getContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
 
                                             }

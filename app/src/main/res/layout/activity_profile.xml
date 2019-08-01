@@ -1,78 +1,496 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    xmlns:src="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
 
-    <include
-        android:id="@+id/settings_toolbar"
-        layout="@layout/app_bar_layout"
-        />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/visit_profile_image"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
-        android:src="@drawable/icon_male"
-        android:layout_width="200dp"
-        android:layout_height="200dp"/>
-    <TextView
-        android:id="@+id/visit_user_name"
-        android:text="UserName"
-        android:layout_below="@+id/visit_profile_image"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/visit_user_status"
-        android:text="Hello Guys"
-        android:layout_below="@+id/visit_user_name"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="25dp"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/send_message_request_button"
-        android:layout_below="@id/visit_user_status"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginRight="65dp"
-        android:textColor="@android:color/background_light"
-        android:background="@drawable/buttons"
-        android:text="Kirim Permintaan"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/decline_message_request_button"
-        android:layout_below="@id/send_message_request_button"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginRight="65dp"
-        android:textColor="@android:color/background_light"
-        android:background="@drawable/buttons"
-        android:text="Batalkan Konsultasi"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_male"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/overlay_dark_10" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/settings_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lyt_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:text="Jessica Veranda"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                        android:textColor="@color/grey_90" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="@dimen/spacing_mxlarge"
+                        android:layout_height="@dimen/spacing_mxlarge"
+                        android:background="@android:color/transparent"
+                        android:tint="@color/grey_60"
+                        android:src="@drawable/ic_school_black_24dp" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pendidikan Terakhir"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/profile_pendidikan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_middle"
+                            android:lineSpacingExtra="2dp"
+                            android:text="Universitas Brawijaya"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_60" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/spacing_mxlarge"
+                    android:layout_height="@dimen/spacing_mxlarge"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_60"
+                    android:src="@drawable/ic_location" />
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tempat Praktik"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/profile_tempat_praktek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:lineSpacingExtra="2dp"
+                        android:text="RS. Fatima Ketapang Kalimantan Barat"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_60" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="@dimen/spacing_mxlarge"
+                        android:layout_height="@dimen/spacing_mxlarge"
+                        android:background="@android:color/transparent"
+                        android:tint="@color/grey_60"
+                        android:src="@drawable/ic_email_black_24dp" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Alamat E-Mail"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/profile_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_middle"
+                            android:lineSpacingExtra="2dp"
+                            android:text="Dicky@gmail.com"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_60" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="@dimen/spacing_mxlarge"
+                        android:layout_height="@dimen/spacing_mxlarge"
+                        android:background="@android:color/transparent"
+                        android:tint="@color/grey_60"
+                        android:src="@drawable/ic_public" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Website"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/profile_web"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_middle"
+                            android:lineSpacingExtra="2dp"
+                            android:text="www.dreytonix.com"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_60" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<ImageButton-->
+                        <!--android:layout_width="@dimen/spacing_mxlarge"-->
+                        <!--android:layout_height="@dimen/spacing_mxlarge"-->
+                        <!--android:background="@android:color/transparent"-->
+                        <!--android:tint="@color/grey_60"-->
+                        <!--app:srcCompat="@drawable/ic_photo_camera" />-->
+
+                    <!--<View-->
+                        <!--android:layout_width="@dimen/spacing_large"-->
+                        <!--android:layout_height="match_parent" />-->
+
+                    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="Photos"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/colorPrimary"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textStyle="bold" />&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<HorizontalScrollView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginTop="@dimen/spacing_middle"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:scrollbarSize="2dp">&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:gravity="center_vertical"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:id="@+id/image_1"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_width="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_height="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginEnd="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginRight="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:src="@color/grey_20" />&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:id="@+id/image_2"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_width="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_height="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginEnd="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginRight="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:src="@color/grey_20" />&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:id="@+id/image_3"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_width="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_height="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginEnd="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginRight="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:src="@color/grey_20" />&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:id="@+id/image_4"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_width="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_height="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginEnd="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginRight="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:src="@color/grey_20" />&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:id="@+id/image_5"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_width="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_height="90dp"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginEnd="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:layout_marginRight="@dimen/spacing_medium"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;android:src="@color/grey_20" />&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;</HorizontalScrollView>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                <!--</LinearLayout>-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/send_message_request_button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"
+            android:background="@drawable/btn_rounded_green_300"
+            android:text="Kirim Permintaan"
+            android:textAllCaps="false"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/decline_message_request_button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"
+            android:layout_below="@+id/send_message_request_button"
+            android:background="@drawable/btn_rounded_green_300"
+            android:text="Batalkan Konsultasi"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".ProfileActivity">-->
+
+    <!--<include-->
+        <!--android:id="@+id/settings_toolbar"-->
+        <!--layout="@layout/app_bar_layout"-->
+        <!--/>-->
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/visit_profile_image"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="110dp"-->
+        <!--android:src="@drawable/icon_male"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/visit_user_name"-->
+        <!--android:text="UserName"-->
+        <!--android:layout_below="@+id/visit_profile_image"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textSize="18sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:id="@+id/visit_user_status"-->
+        <!--android:text="Hello Guys"-->
+        <!--android:layout_below="@+id/visit_user_name"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textSize="25sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<Button-->
+        <!--android:id="@+id/send_message_request_button"-->
+        <!--android:layout_below="@id/visit_user_status"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:layout_marginLeft="65dp"-->
+        <!--android:layout_marginRight="65dp"-->
+        <!--android:textColor="@android:color/background_light"-->
+        <!--android:background="@drawable/buttons"-->
+        <!--android:text="Kirim Permintaan"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<Button-->
+        <!--android:id="@+id/decline_message_request_button"-->
+        <!--android:layout_below="@id/send_message_request_button"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:layout_marginLeft="65dp"-->
+        <!--android:layout_marginRight="65dp"-->
+        <!--android:textColor="@android:color/background_light"-->
+        <!--android:background="@drawable/buttons"-->
+        <!--android:text="Batalkan Konsultasi"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:visibility="invisible"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+<!--</RelativeLayout>-->

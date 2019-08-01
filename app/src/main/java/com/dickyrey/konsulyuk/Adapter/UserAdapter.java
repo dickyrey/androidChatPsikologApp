@@ -49,7 +49,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         final User u = mUsers.get(position);
         holder.username.setText(u.getName());
-        holder.userstatus.setText(u.getStatus());
+        holder.userpendidikan.setText(u.getPendidikan());
+
         Picasso.get().load(u.getImage()).placeholder(R.drawable.icon_male).into(holder.profile_image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView username, userstatus;
+        public TextView username, userpendidikan;
         public ImageView profile_image;
 
         public ViewHolder(View itemView){
@@ -80,7 +81,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
 
             username = itemView.findViewById(R.id.username);
-            userstatus = itemView.findViewById(R.id.userstatus);
+            userpendidikan = itemView.findViewById(R.id.userstatus);
             profile_image = itemView.findViewById(R.id.profile_image);
 
 

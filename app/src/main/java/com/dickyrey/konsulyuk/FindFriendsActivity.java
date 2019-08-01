@@ -37,8 +37,9 @@ public class FindFriendsActivity extends AppCompatActivity {
     private UserAdapter userAdapter;
     private List<User> mUsers;
 
+    private FirebaseAuth mAuth;
 
-
+    private String currentUserID;
 
 
     @Override
@@ -57,6 +58,8 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
 
         mUsers = new ArrayList<>();
@@ -85,7 +88,7 @@ public class FindFriendsActivity extends AppCompatActivity {
 
     private void searchUsers(String s) {
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
+        Query query = FirebaseDatabase.getInstance().getReference("Psikolog").orderByChild("search")
                 .startAt(s)
                 .endAt(s+"\uf88f");
         query.addValueEventListener(new ValueEventListener() {
@@ -114,7 +117,8 @@ public class FindFriendsActivity extends AppCompatActivity {
 
     private void readUsers() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Psikolog");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -124,10 +128,11 @@ public class FindFriendsActivity extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         User user = snapshot.getValue(User.class);
 
+
                         assert user != null;
                         assert firebaseUser != null;
-
-                        if (!user.getUid().equals(firebaseUser.getUid())) {
+                        if (!user.getUid()
+                                .equals(firebaseUser.getUid())) {
                             mUsers.add(user);
                         }
 

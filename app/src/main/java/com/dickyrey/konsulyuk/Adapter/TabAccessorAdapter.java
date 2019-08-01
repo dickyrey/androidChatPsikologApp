@@ -6,8 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.dickyrey.konsulyuk.Fragment.ChatsFragment;
-import com.dickyrey.konsulyuk.Fragment.ContactsFragment;
-import com.dickyrey.konsulyuk.Fragment.GroubFragment;
+import com.dickyrey.konsulyuk.Fragment.ArtikelFragment;
 import com.dickyrey.konsulyuk.Fragment.MenuFragment;
 import com.dickyrey.konsulyuk.Fragment.RequestsFragment;
 
@@ -28,8 +27,8 @@ public class TabAccessorAdapter extends FragmentPagerAdapter {
                 ChatsFragment chatsFragment = new ChatsFragment();
                 return chatsFragment;
             case 2 :
-                GroubFragment groubFragment= new GroubFragment();
-                return groubFragment;
+                ArtikelFragment artikelFragment = new ArtikelFragment();
+                return artikelFragment;
 //            case 3 :
 //                ContactsFragment contactsFragment = new ContactsFragment();
 //                return contactsFragment;
