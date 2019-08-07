@@ -6,33 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_10"
     tools:context=".Fragment.ArtikelFragment">
 
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/reycler_artikel"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+       android:layout_height="match_parent"
+       android:padding="8dp"
+       ></androidx.recyclerview.widget.RecyclerView>
 
-   <!--</ListView>-->
-
-   <!--<Button-->
-       <!--android:text="New Artikel"-->
-       <!--android:id="@+id/fab_add_group"-->
-       <!--android:layout_width="match_parent"-->
-       <!--android:layout_height="wrap_content" />-->
-
-   <com.google.android.material.floatingactionbutton.FloatingActionButton
-       android:id="@+id/fab_add_group"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true"
-       android:layout_alignParentRight="true"
-       android:layout_margin="@dimen/spacing_smlarge"
-       android:src="@drawable/ic_edit_black_24dp"
-       android:tint="@android:color/white"
-       app:backgroundTint="@color/green_500"
-       app:fabSize="normal"
-       app:rippleColor="@android:color/white" />
 
 </RelativeLayout>

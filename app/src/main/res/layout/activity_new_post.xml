@@ -1,49 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewPostActivity">
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <include layout="@layout/toolbar" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/newPostImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/goosee" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_smlarge">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Topik Artikel"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                                <EditText
+                                    android:id="@+id/newPostTopik"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_middle"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Topik Artkel"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/grey_90" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_smlarge">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Judul Artikel"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                                <EditText
+                                    android:id="@+id/newPostJudul"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_middle"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Judul Artikel"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/grey_90" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_smlarge">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Deskripsi"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                                <EditText
+                                    android:id="@+id/newPostDeskripsi"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_middle"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Tulis Deskripsi"
+                                    android:inputType="textMultiLine"
+                                    android:minHeight="?attr/actionBarSize"
+                                    android:overScrollMode="always"
+                                    android:scrollbarStyle="insideInset"
+                                    android:scrollbars="vertical"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                    android:textColor="@color/grey_90" />
+
+                        </LinearLayout>
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/newPostToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+                </LinearLayout>
 
-    <ImageView
-        android:id="@+id/newPostImage"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:scaleType="fitXY"
-        android:layout_below="@+id/newPostToolbar"
-        android:layout_marginTop="2dp"
-        app:srcCompat="@drawable/bg_polygon" />
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/newPostDescription"
-        android:hint="Tulis Judul Artikel"
-        android:layout_marginTop="10dp"
-        android:layout_margin="14dp"
-        android:layout_below="@id/newPostImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        </androidx.core.widget.NestedScrollView>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/newPostJudul"
-        android:hint="Tulis Deskripsi Artikel"
-        android:layout_marginTop="10dp"
-        android:layout_margin="14dp"
-        android:layout_below="@id/newPostDescription"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-    <Button
-        android:id="@+id/newPostButton"
-        android:layout_below="@id/newPostJudul"
-        android:text="Upload Artikel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+</LinearLayout>

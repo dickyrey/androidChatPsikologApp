@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
+    android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,12 +13,12 @@
         <ImageView
             android:id="@+id/blog_image"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
             android:src="@drawable/image_7" />
 
         <TextView
-            android:id="@+id/blog_judul"
+            android:id="@+id/blog_topik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"
@@ -25,7 +26,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <TextView
-            android:id="@+id/blog_desc"
+            android:id="@+id/blog_judul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_large"

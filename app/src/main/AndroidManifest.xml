@@ -13,8 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewPostActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SettingArtikel"></activity>
+        <activity
+            android:name=".ArtikelActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NewPostActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".KlienActivity"
             android:parentActivityName=".MainActivity" />

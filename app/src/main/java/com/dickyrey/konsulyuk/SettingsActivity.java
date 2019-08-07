@@ -68,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(SettingsToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Daftar Klien");
+        getSupportActionBar().setTitle("Pengaturan Akun");
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -176,16 +176,16 @@ public class SettingsActivity extends AppCompatActivity {
         String setWeb = setting_web.getText().toString();
 
         if (TextUtils.isEmpty(setName) && mainImageUri != null){
-            Toast.makeText(this, "Tulis Nama Kamu dengan benar!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tulis Kolom Dengan Benar!", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(setPendidikan)){
-            Toast.makeText(this, "Tulis Pendidikan Terakhir Kamu!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tulis Kolom Dengan Benar!", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(setEmail)){
-            Toast.makeText(this, "Tulis e-Mail Kamu!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tulis Kolom Dengan Benar!", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(setTempatPraktek)){
-            Toast.makeText(this, "Tulis Tempat Praktek Kamu!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tulis Kolom Dengan Benar!", Toast.LENGTH_SHORT).show();
         }else{
             HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uid", currentUserID);

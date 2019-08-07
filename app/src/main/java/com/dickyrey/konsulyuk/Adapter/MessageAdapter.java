@@ -457,7 +457,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
-                                                ;
                                                 holder.senderMessageText.setVisibility(View.GONE);
                                                 Toast.makeText(holder.itemView.getContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
 

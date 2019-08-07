@@ -4,6 +4,7 @@ package com.dickyrey.konsulyuk.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -73,22 +74,27 @@ public class ArtikelFragment extends Fragment {
     }
 
     private void load(){
+        artikelList.clear();
         databaseArtikels.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Artikel artikel = snapshot.getValue(Artikel.class);
                     Artikel data = new Artikel();
+                    String id = artikel.getArtikel_id();
+                    String topik = artikel.getTopik();
                     String judul = artikel.getJudul();
                     String desc = artikel.getDesc();
                     String gambar = artikel.getImage_thumb();
 
+                    data.setTopik(topik);
+                    data.setArtikel_id(id);
                     data.setJudul(judul);
                     data.setDesc(desc);
                     data.setImage_thumb(gambar);
                     artikelList.add(data);
                 }
-                ArtikelList recycler = new ArtikelList(artikelList);
+                ArtikelList recycler = new ArtikelList(getContext(), artikelList);
                 RecyclerView.LayoutManager layoutmanager = new LinearLayoutManager(getActivity());
                 recycler_artikel.setLayoutManager(layoutmanager);
                 recycler_artikel.setItemAnimator( new DefaultItemAnimator());

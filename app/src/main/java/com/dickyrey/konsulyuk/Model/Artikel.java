@@ -2,13 +2,14 @@ package com.dickyrey.konsulyuk.Model;
 
 public class Artikel {
 
-    public String artikel_id,judul, date, desc, image_url, image_thumb, time, user_id;
+    private String artikel_id, topik, judul, date, desc, image_url, image_thumb, time, user_id;
 
     public Artikel() {
     }
 
-    public Artikel(String artikel_id, String judul, String date, String desc, String image_url, String image_thumb, String time, String user_id) {
+    public Artikel(String artikel_id, String topik, String judul, String date, String desc, String image_url, String image_thumb, String time, String user_id) {
         this.artikel_id = artikel_id;
+        this.topik = topik;
         this.judul = judul;
         this.date = date;
         this.desc = desc;
@@ -24,6 +25,14 @@ public class Artikel {
 
     public void setArtikel_id(String artikel_id) {
         this.artikel_id = artikel_id;
+    }
+
+    public String getTopik() {
+        return topik;
+    }
+
+    public void setTopik(String topik) {
+        this.topik = topik;
     }
 
     public String getJudul() {
