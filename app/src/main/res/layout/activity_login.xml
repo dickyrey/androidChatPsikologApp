@@ -2,313 +2,243 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    tools:context=".LoginActivity">
-
-<LinearLayout
-    android:layout_width="330dp"
-    android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    android:orientation="vertical"
-    android:padding="14dp" >
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/spacing_small" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/logooo" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/spacing_medium" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:text="Aplikasi Chat Bersama Psikolog"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:textColor="@color/green_300"
-        android:gravity="center"
-        android:textStyle="bold" />
+    android:background="@color/loginSignup1Background">
 
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="USERNAME"
-        android:textAlignment="center"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-        android:textColor="@color/blue_grey_200" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/login_email"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginRight="-1dp"
-        android:inputType="text"
-        android:maxLength="50"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/blue_grey_800"
-        android:theme="@style/EditText.Green" />
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/spacing_mlarge" />
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/logooo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PASSWORD"
-        android:textAlignment="center"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-        android:textColor="@color/blue_grey_200" />
+        <TextView
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginRight="-1dp"
-        android:inputType="textPassword"
-        android:maxLength="50"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/blue_grey_800"
-        android:theme="@style/EditText.Green" />
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selamat Datang di Psikologiku" />
 
-    <TextView
-        android:id="@+id/forget_password_link"
-        android:layout_gravity="right"
-        android:text="Lupa Password?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Akses Aplikasi Sebagai Psikolog untuk membantu masalah teman-teman" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/spacing_mxlarge" />
+        <TextView
+            android:text="Tulis Nomor Handphone diawali dengan +62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/phone_number_input"
+            style="@style/LoginSignUp25Input"
+            android:text="+62"
+            android:hint="Phone Number"
+            android:inputType="phone" />
+        <EditText
+            android:id="@+id/verification_code_input"
+            style="@style/LoginSignUp25Input"
+            android:hint="Tulis Kode Verifikasi"
+            android:inputType="phone"
+            android:visibility="invisible"/>
 
-    <Button
-        android:id="@+id/login_button"
+        <Button
+        android:id="@+id/send_ver_code_button"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginLeft="-4dp"
         android:layout_marginRight="-4dp"
         android:background="@drawable/btn_rounded_green_300"
-        android:text="L O G I N"
+        android:text="Kirim Kode Verifikasi"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/spacing_medium" />
-
-    <LinearLayout
-        android:id="@+id/sign_up_for_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tidak Punya Akun?"
-            android:layout_marginRight="10dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-            android:textColor="@color/blue_grey_400" />
-
-        <TextView
-            android:id="@+id/need_new_account_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Daftar"
+        <Button
+            android:id="@+id/verify_button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"
+            android:background="@drawable/btn_rounded_green_300"
+            android:text="Verifikasi Sekarang"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-            android:textColor="@color/blue_grey_400" />
+            android:visibility="invisible"/>
+
+
 
     </LinearLayout>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/spacing_xlarge" />
-
-</LinearLayout>
-
 </RelativeLayout>
 
+
+
     <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<androidx.drawerlayout.widget.DrawerLayout-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:id="@+id/drawer_layout"-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--tools:openDrawer="start"-->
-    <!--android:background="#ffff"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:orientation="vertical"-->
     <!--tools:context=".LoginActivity">-->
 
-    <!--<androidx.core.widget.NestedScrollView-->
-    <!--android:layout_width="match_parent"-->
+<!--<LinearLayout-->
+    <!--android:layout_width="330dp"-->
     <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginTop="?attr/actionBarSize">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:focusable="true"-->
-    <!--android:focusableInTouchMode="true"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/loginsignup18_bg"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:background="#ffff">-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="14dp" >-->
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/spacing_small" />-->
 
     <!--<ImageView-->
-    <!--android:id="@+id/imageView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="100dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:src="@drawable/logooo"/>-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:src="@drawable/logooo" />-->
+
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/spacing_medium" />-->
 
     <!--<TextView-->
-    <!--android:id="@+id/textView2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/imageView"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginTop="14dp"-->
-    <!--android:text="Aplikasi Chat Bersama Psikolog"-->
-    <!--android:textColor="@android:color/holo_blue_dark"-->
-    <!--android:textSize="22sp" />-->
-    <!--</RelativeLayout>-->
-
-    <!--<androidx.cardview.widget.CardView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="10dp"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:layout_marginTop="10dp">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:paddingBottom="10dp">-->
-
-    <!--<EditText-->
-
-    <!--android:background="#DFDEDE"-->
-    <!--android:id="@+id/login_email"-->
-    <!--style="@style/LoginSignUp18Input"-->
-    <!--android:hint="Alamat e-mail"-->
-    <!--android:inputType="textEmailAddress"-->
-    <!--/>-->
-    <!--<EditText-->
-    <!--android:background="#DFDEDE"-->
-    <!--android:id="@+id/login_password"-->
-    <!--style="@style/LoginSignUp18Input"-->
-    <!--android:hint="Password"-->
-    <!--android:inputType="textPassword"-->
-    <!--/>-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="10dp">-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="@dimen/spacing_medium"-->
+        <!--android:text="Aplikasi Chat Bersama Psikolog"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"-->
+        <!--android:textColor="@color/green_300"-->
+        <!--android:gravity="center"-->
+        <!--android:textStyle="bold" />-->
 
 
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1" />-->
 
     <!--<TextView-->
-    <!--android:id="@+id/forget_password_link"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:text="Lupa Password?"-->
-    <!--android:textColor="@color/loginSignup15text"-->
-    <!--android:textStyle="bold" />-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="USERNAME"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+        <!--android:textColor="@color/blue_grey_200" />-->
 
-    <!--</RelativeLayout>-->
+    <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+        <!--android:id="@+id/login_email"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="-1dp"-->
+        <!--android:layout_marginRight="-1dp"-->
+        <!--android:inputType="text"-->
+        <!--android:maxLength="50"-->
+        <!--android:maxLines="1"-->
+        <!--android:singleLine="true"-->
+        <!--android:textColor="@color/blue_grey_800"-->
+        <!--android:theme="@style/EditText.Green" />-->
+
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/spacing_mlarge" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="PASSWORD"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+        <!--android:textColor="@color/blue_grey_200" />-->
+
+    <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+        <!--android:id="@+id/login_password"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="-1dp"-->
+        <!--android:layout_marginRight="-1dp"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:maxLength="50"-->
+        <!--android:maxLines="1"-->
+        <!--android:singleLine="true"-->
+        <!--android:textColor="@color/blue_grey_800"-->
+        <!--android:theme="@style/EditText.Green" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/forget_password_link"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:text="Lupa Password?"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/spacing_mxlarge" />-->
 
     <!--<Button-->
-    <!--android:id="@+id/login_button"-->
-    <!--style="@style/ButtonOrange"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="46dp"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:text="LOGIN"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textAllCaps="false"-->
-    <!--android:textColor="@android:color/white" />-->
+        <!--android:id="@+id/login_button"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:layout_marginLeft="-4dp"-->
+        <!--android:layout_marginRight="-4dp"-->
+        <!--android:background="@drawable/btn_rounded_green_300"-->
+        <!--android:text="L O G I N"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textStyle="bold" />-->
 
-    <!--<Button-->
-    <!--android:id="@+id/phone_login_button"-->
-    <!--style="@style/ButtonBlue"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="46dp"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:text="Login dengan nomor handphone"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textAllCaps="false"-->
-    <!--android:textColor="@android:color/white" />-->
 
-    <!--</LinearLayout>-->
-
-    <!--</androidx.cardview.widget.CardView>-->
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/spacing_medium" />-->
 
     <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="20dp"-->
-    <!--android:gravity="center_horizontal"-->
-    <!--android:orientation="horizontal">-->
+        <!--android:id="@+id/sign_up_for_account"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/spacing_medium"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal">-->
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Tidak punya akun? "-->
-    <!--android:textSize="19sp"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Tidak Punya Akun?"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+            <!--android:textColor="@color/blue_grey_400" />-->
 
-    <!--<TextView-->
-    <!--android:id="@+id/need_new_account_link"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Daftar"-->
-    <!--android:textSize="19sp"-->
-    <!--android:textStyle="bold" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/need_new_account_link"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Daftar"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+            <!--android:textColor="@color/blue_grey_400" />-->
 
     <!--</LinearLayout>-->
 
-    <!--</LinearLayout>-->
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/spacing_xlarge" />-->
 
-    <!--</androidx.core.widget.NestedScrollView>-->
+<!--</LinearLayout>-->
 
+<!--</RelativeLayout>-->
 
-    <!--</androidx.drawerlayout.widget.DrawerLayout>-->

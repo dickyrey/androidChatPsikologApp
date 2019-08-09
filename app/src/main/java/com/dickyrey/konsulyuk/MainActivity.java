@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_profile:
                     fragment = new AccountFragment();
                     loadFragment(fragment);
-
+                    return true;
             }
             return false;
         }
@@ -220,9 +220,7 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.main_settings_options){
             SendToSettingsActivity();
         }
-        if(item.getItemId() == R.id.main_create_group_options){
-            RequestNewGroup();
-        }
+
         if(item.getItemId() == R.id.main_cari_klien_options){
             SendToFindFriendsActivity();
         }
@@ -231,46 +229,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void RequestNewGroup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialog);
-        builder.setTitle("Masukkan nama Grup");
-
-        final EditText groupNameField = new EditText(MainActivity.this);
-        groupNameField.setHint("Apa yang kamu ingin diskusikan?");
-        builder.setView(groupNameField);
-
-        builder.setPositiveButton("Buat", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String groupName = groupNameField.getText().toString();
-
-                if (TextUtils.isEmpty(groupName)){
-                    Toast.makeText(MainActivity.this, "Tolong tulis nama grup!", Toast.LENGTH_SHORT).show();
-                }else{
-                    CreateNewGroup(groupName);
-                }
-            }
-        });
-        builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        builder.show();
-    }
-
-    private void CreateNewGroup(final String groupName) {
-        RootRef.child("Groups").child(groupName).setValue("")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(MainActivity.this, groupName + " telah berhasil dibuat", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
     private void SendToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);

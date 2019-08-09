@@ -7,11 +7,6 @@
         app:showAsAction="never">
     </item>
     <item
-        android:title="Buat Grup"
-        android:id="@+id/main_create_group_options"
-        app:showAsAction="never">
-    </item>
-    <item
         android:title="Pengaturan"
         android:id="@+id/main_settings_options"
         app:showAsAction="never">

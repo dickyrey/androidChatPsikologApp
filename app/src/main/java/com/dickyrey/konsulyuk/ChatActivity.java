@@ -427,7 +427,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private void DisplayLastSeen(){
-        RootRef.child("Psikolog").child(messageSenderID)
+        RootRef.child("Klien").child(messageReceiverID)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

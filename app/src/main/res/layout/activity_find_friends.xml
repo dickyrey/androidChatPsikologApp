@@ -13,7 +13,7 @@
         android:id="@+id/search_users"
         android:layout_below="@+id/find_firends_toolbar"
         android:layout_margin="5dp"
-        android:hint="Cari psikolog.."
+        android:hint="Cari Klien..."
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

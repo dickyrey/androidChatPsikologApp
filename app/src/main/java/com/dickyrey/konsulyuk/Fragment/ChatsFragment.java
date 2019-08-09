@@ -61,7 +61,7 @@ public class ChatsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         ChatsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Psikolog");
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Klien");
 
         return PrivateChatsView;
     }

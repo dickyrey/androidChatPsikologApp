@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.dickyrey.konsulyuk.Model.Kliens;
 import com.dickyrey.konsulyuk.Model.User;
 import com.dickyrey.konsulyuk.Adapter.UserAdapter;
 
@@ -35,7 +36,7 @@ public class FindFriendsActivity extends AppCompatActivity {
 
     private EditText search_users;
     private UserAdapter userAdapter;
-    private List<User> mUsers;
+    private List<Kliens> mUsers;
 
     private FirebaseAuth mAuth;
 
@@ -88,7 +89,7 @@ public class FindFriendsActivity extends AppCompatActivity {
 
     private void searchUsers(String s) {
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference("Psikolog").orderByChild("search")
+        Query query = FirebaseDatabase.getInstance().getReference("Klien").orderByChild("search")
                 .startAt(s)
                 .endAt(s+"\uf88f");
         query.addValueEventListener(new ValueEventListener() {
@@ -96,12 +97,12 @@ public class FindFriendsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
+                    Kliens  kliens = snapshot.getValue(Kliens.class);
 
-                    assert user != null;
+                    assert kliens != null;
                     assert fuser != null;
-                    if (!user.getUid().equals(fuser.getUid())){
-                        mUsers.add(user);
+                    if (!kliens.getUid().equals(fuser.getUid())){
+                        mUsers.add(kliens);
                     }
                 }
                 userAdapter = new UserAdapter(FindFriendsActivity.this, mUsers);
@@ -118,7 +119,7 @@ public class FindFriendsActivity extends AppCompatActivity {
     private void readUsers() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Psikolog");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Klien");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -126,14 +127,14 @@ public class FindFriendsActivity extends AppCompatActivity {
 
                     mUsers.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        User user = snapshot.getValue(User.class);
+                        Kliens kliens = snapshot.getValue(Kliens.class);
 
 
-                        assert user != null;
+                        assert kliens != null;
                         assert firebaseUser != null;
-                        if (!user.getUid()
+                        if (!kliens.getUid()
                                 .equals(firebaseUser.getUid())) {
-                            mUsers.add(user);
+                            mUsers.add(kliens);
                         }
 
                     }
