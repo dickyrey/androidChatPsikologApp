@@ -29,8 +29,8 @@
                             android:id="@+id/newPostImage"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/goosee" />
+                            android:scaleType="centerInside"
+                            android:src="@drawable/uploadimage" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

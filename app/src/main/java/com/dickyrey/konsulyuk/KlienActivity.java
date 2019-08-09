@@ -87,7 +87,7 @@ public class KlienActivity extends AppCompatActivity {
                             }
 
                             final String retName = dataSnapshot.child("name").getValue().toString();
-                            final String retStatus = dataSnapshot.child("pendidikan").getValue().toString();
+                            final String retStatus = dataSnapshot.child("kota").getValue().toString();
 
                             holder.userName.setText(retName);
                             holder.userStatus.setText(retStatus);

@@ -41,10 +41,12 @@
             android:text="Tulis Nomor Handphone diawali dengan +62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/phone_number_input"
             style="@style/LoginSignUp25Input"
             android:text="+62"
+            android:textColor="@android:color/black"
             android:hint="Phone Number"
             android:inputType="phone" />
         <EditText
