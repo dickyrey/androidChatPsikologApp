@@ -130,7 +130,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
                 loadingBar.dismiss();
 
-                Toast.makeText(PhoneLoginActivity.this, "Kode verifikasi telah dikirim@", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PhoneLoginActivity.this, "Kode verifikasi telah dikirim", Toast.LENGTH_SHORT).show();
 
 
                 SendVerificationCodeButton.setVisibility(View.INVISIBLE);
@@ -150,8 +150,11 @@ public class PhoneLoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             loadingBar.dismiss();
                             Toast.makeText(PhoneLoginActivity.this, "Berhasil login!", Toast.LENGTH_SHORT).show();
-                            SendUserToMainActivity();
+//                            SendUserToMainActivity();
+                            SendUserToMainSetting();
+
                         }else{
+
                             String message = task.getException().toString();
                             Toast.makeText(PhoneLoginActivity.this, "Kode Verifikasi Salah, Coba Lagi!" , Toast.LENGTH_SHORT).show();
                         }
@@ -159,8 +162,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(PhoneLoginActivity.this, MainActivity.class);
+    private void SendUserToMainSetting() {
+        Intent mainIntent = new Intent(PhoneLoginActivity.this, SettingArtikel.class);
         startActivity(mainIntent);
         finish();
     }

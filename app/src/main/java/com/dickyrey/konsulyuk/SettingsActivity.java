@@ -175,7 +175,7 @@ public class SettingsActivity extends AppCompatActivity {
         String setTempatPraktek = setting_tempat_praktek.getText().toString();
         String setWeb = setting_web.getText().toString();
 
-        if (TextUtils.isEmpty(setName) && mainImageUri != null){
+        if (TextUtils.isEmpty(setName) && mainImageUri == null){
             Toast.makeText(this, "Tulis Kolom Dengan Benar!", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(setPendidikan)){

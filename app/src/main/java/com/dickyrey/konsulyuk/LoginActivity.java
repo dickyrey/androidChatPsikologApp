@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 loadingBar.dismiss();
 
-                Toast.makeText(LoginActivity.this, "Kode verifikasi telah dikirim@", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Kode verifikasi telah dikirim", Toast.LENGTH_SHORT).show();
 
 
                 SendVerificationCodeButton.setVisibility(View.INVISIBLE);
@@ -276,7 +276,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(LoginActivity.this, SettingsActivity.class);
         startActivity(mainIntent);
         finish();
     }

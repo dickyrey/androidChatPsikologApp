@@ -245,7 +245,7 @@ public class RequestsFragment extends Fragment {
                                                 }
 
                                                 final String requestUserName = dataSnapshot.child("name").getValue().toString();
-                                                final String requestUserStatus = dataSnapshot.child("pendidikan").getValue().toString();
+                                                final String requestUserStatus = dataSnapshot.child("kota").getValue().toString();
 
                                                 holder.userName.setText(requestUserName);
                                                 holder.userStatus.setText("Kamu mengirim permintaan ke " + requestUserName);

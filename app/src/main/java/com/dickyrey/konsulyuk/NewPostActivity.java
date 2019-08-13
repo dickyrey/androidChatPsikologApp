@@ -187,13 +187,13 @@ public class NewPostActivity extends AppCompatActivity {
             final String judul = newPostJudul.getText().toString();
             final String desc = newPostDescription.getText().toString();
             if (TextUtils.isEmpty(topik) && newPostImageUri != null){
-                Toast.makeText(this, "Masukkan Topik Artikel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Isi Kolom yang belum terisi!", Toast.LENGTH_SHORT).show();
             }
             if (TextUtils.isEmpty(judul)){
-                Toast.makeText(this, "Masukkan Topik Artikel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Isi Kolom yang belum terisi!", Toast.LENGTH_SHORT).show();
             }
             if (TextUtils.isEmpty(desc)){
-                Toast.makeText(this, "Masukkan Topik Artikel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Isi Kolom yang belum terisi!", Toast.LENGTH_SHORT).show();
             }else{
                 final String randomName = UUID.randomUUID().toString();
                 StorageReference filePath = storageReference.child("artikel_images").child(randomName + ".jpg");

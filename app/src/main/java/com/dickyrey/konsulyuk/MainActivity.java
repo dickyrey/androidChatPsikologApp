@@ -244,6 +244,9 @@ public class MainActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         startActivity(settingIntent);
+        settingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        finish();
     }
     private void SendToFindFriendsActivity() {
         Intent findFriendsIntent = new Intent(MainActivity.this, FindFriendsActivity.class);
