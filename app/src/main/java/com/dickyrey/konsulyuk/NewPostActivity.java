@@ -188,6 +188,7 @@ public class NewPostActivity extends AppCompatActivity {
             final String desc = newPostDescription.getText().toString();
             if (TextUtils.isEmpty(topik) && newPostImageUri != null){
                 Toast.makeText(this, "Isi Kolom yang belum terisi!", Toast.LENGTH_SHORT).show();
+
             }
             if (TextUtils.isEmpty(judul)){
                 Toast.makeText(this, "Isi Kolom yang belum terisi!", Toast.LENGTH_SHORT).show();
@@ -195,6 +196,11 @@ public class NewPostActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(desc)){
                 Toast.makeText(this, "Isi Kolom yang belum terisi!", Toast.LENGTH_SHORT).show();
             }else{
+                loadingBar.setTitle("Mengunggah Artikel");
+                loadingBar.setMessage("Mohon tunggu....");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+
                 final String randomName = UUID.randomUUID().toString();
                 StorageReference filePath = storageReference.child("artikel_images").child(randomName + ".jpg");
 
@@ -267,6 +273,7 @@ public class NewPostActivity extends AppCompatActivity {
                                                     }else{
 
                                                     }
+                                                    loadingBar.dismiss();
                                                 }
                                             });
                                 }
@@ -278,7 +285,7 @@ public class NewPostActivity extends AppCompatActivity {
                             });
 
                         }else{
-
+                            loadingBar.dismiss();
                         }
                     }
                 });
